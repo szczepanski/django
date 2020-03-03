@@ -80,7 +80,7 @@ https://postgresapp.com/
   
   
   - change default sqllite3
-    - set env var
+    - set env var ``` export DATABASE_PSD='**************' ```
     
   
 ```
