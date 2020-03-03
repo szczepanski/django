@@ -63,7 +63,51 @@ python3.8 manage.py changepassword <username>
 - register models to show in admin web gui 
 blog/app_projects/admin.py
 
-## migrations from sqllite3 to PostreSQL
+## migrations from sqllite3 to PostreSQL 12(Mac ver)
+
+- download and install
+
+https://postgresapp.com/
+
+- db setup 
+
+  - choose 'postgress' server to init terminal
+  - \du <check users>
+  - \password postgres <create psd for psql user >
+  - CREATE DATABASE core_db; <new db>
+  - DROP DATABASE core_db; <remove db>
+  - \l <list all dbs>
+  
+  
+  - change default sqllite3
+    - set env var
+    
+  
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+to 
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':'core_db',
+        'USER':'postgres'
+        'PASSWORD':''
+        'HOST':
+        'PORT':
+        
+    }
+}
+```
+
+
+
 
 # tools
 - online viewer to see db.sqlite3 file (if no confidential data involved)
