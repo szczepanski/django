@@ -129,7 +129,8 @@ DATABASES = {
 - list databases ``` postgres=# \l ```
 - switching / connecting to database
 
-``` 
+```
+```
 postgres=# \c core_db 
 ```
 
@@ -151,6 +152,7 @@ core_db=# \dt+
  public | auth_group                 | table | postgres | 0 bytes    | 
  public | auth_group_permissions     | table | postgres | 0 bytes    | 
 ...
+
 ```
 
 
