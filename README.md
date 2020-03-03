@@ -140,24 +140,27 @@ You are now connected to database "core_db" as user "*******".
 core_db=#
 ```
 
-- checking tables created inside
+- checking tables created inside connected database
 
 ```
-core_db=# \dt
+core_db=# \dt+
 # sample output
 
-                   List of relations
- Schema |            Name            | Type  |  Owner   
---------+----------------------------+-------+----------
- public | app_blog_post              | table | postgres
- public | auth_group                 | table | postgres
- public | auth_group_permissions     | table | postgres
+                                 List of relations
+ Schema |            Name            | Type  |  Owner   |    Size    | Description 
+--------+----------------------------+-------+----------+------------+-------------
+ public | app_blog_post              | table | postgres | 8192 bytes | 
+ public | auth_group                 | table | postgres | 0 bytes    | 
+ public | auth_group_permissions     | table | postgres | 0 bytes    | 
 ...
 ```
 
 
 # tools
+
 - online viewer to see db.sqlite3 file (if no confidential data involved)
 http://inloop.github.io/sqlite-viewer/
+
+
 
 # resources
