@@ -5,6 +5,12 @@ django
 ## pre-reqs - python3.8
 ```pip3.8 install Django
 pip3.8 install pillow
+# mac specific - path to postgres.app
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/12/bin
+# verify path
+which pg_config
+# pip3.8 install psycopg2 #did not work
+pip3.8 install psycopg2-binary  
 ```
 ## initial django / git (basic) workflow 
 
@@ -110,8 +116,8 @@ to
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'os.environ['DATABASE_NAME']',
-        'USER':'os.environ['DATABASE_USR']',
+        'NAME':os.environ['DATABASE_NAME'],
+        'USER':os.environ['DATABASE_USR'],
         'PASSWORD':os.environ['DATABASE_PSD'],
         'HOST':os.environ['DATABASE_HOST'],
         'PORT':os.environ['DATABASE_PORT'],
@@ -121,6 +127,33 @@ DATABASES = {
 ```
 
 
+### verify PSQL db
+- list databases ``` postgres=# \l ```
+- switching / connecting to database
+
+``` 
+postgres=# \c core_db 
+```
+
+```
+You are now connected to database "core_db" as user "*******".
+core_db=#
+```
+
+- checking tables created inside
+
+```
+core_db=# \dt
+# sample output
+
+                   List of relations
+ Schema |            Name            | Type  |  Owner   
+--------+----------------------------+-------+----------
+ public | app_blog_post              | table | postgres
+ public | auth_group                 | table | postgres
+ public | auth_group_permissions     | table | postgres
+...
+```
 
 
 # tools
