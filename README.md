@@ -63,6 +63,10 @@ python3.8 manage.py changepassword <username>
 - register models to show in admin web gui 
 blog/app_projects/admin.py
 
+## migrations from sqllite3 to PostreSQL
+
 # tools
 - online viewer to see db.sqlite3 file (if no confidential data involved)
 http://inloop.github.io/sqlite-viewer/
+
+# resources
