@@ -154,6 +154,25 @@ core_db=# \dt+
 ...
 
 ```
+- checking selected table
+
+```
+core_db=# \d+ app_blog_post
+# sample output
+
+
+                                                        Table "public.app_blog_post"
+ Column  |          Type          | Collation | Nullable |                  Default                  | Storage  | Stats target | Description 
+---------+------------------------+-----------+----------+-------------------------------------------+----------+--------------+-------------
+ id      | integer                |           | not null | nextval('app_blog_post_id_seq'::regclass) | plain    |              | 
+ title   | character varying(200) |           | not null |                                           | extended |              | 
+ date    | date                   |           | not null |                                           | plain    |              | 
+ brief   | text                   |           | not null |                                           | extended |              | 
+ content | text                   |           | not null |                                           | extended |              | 
+Indexes:
+    "app_blog_post_pkey" PRIMARY KEY, btree (id)
+Access method: heap
+```
 
 
 # tools
