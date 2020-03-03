@@ -175,6 +175,54 @@ Access method: heap
 ```
 
 
+# Django CMS - Wagtail
+
+## initial setup
+
+- pre-req
+```
+mkdir django-wag
+cd django-wag
+python3.8 -m venv django-wag-venv
+source django-wag-venv/bin/activate
+pip3.8 install wagtail
+# to disable venv
+deactivate
+
+
+
+# verify wagtail
+pip show wagtail
+# verify packeges installed in venv
+pip3.8 freeze
+```
+- init project
+
+```
+#init in current dir without creating separate directory - directly within current working directory
+wagtail start wag_play .
+
+#or
+
+#init all project files inside separate wag_play subdirectory 
+wagtail start wag_play
+pip3.8 install -r requirements.txt
+```
+
+- init run
+```
+# discover migrations and migrate DB
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+# init server
+python3.8 manage.py runserver 0.0.0.0:8000
+#
+
+```
+
+
+
+
 # tools
 
 - online viewer to see db.sqlite3 file (if no confidential data involved)
