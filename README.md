@@ -80,7 +80,14 @@ https://postgresapp.com/
   
   
   - change default sqllite3
-    - set env var ``` export DATABASE_PSD='**************' ```
+    - set env var 
+    ``` 
+    export DATABASE_NAME='**************' 
+    export DATABASE_USR='**************' 
+    export DATABASE_PSD='**************' 
+    export DATABASE_HOST='**************' 
+    export DATABASE_PORT='**************'
+    ```
     
   
 ```
@@ -96,11 +103,11 @@ to
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'core_db',
-        'USER':'postgres'
-        'PASSWORD':''
-        'HOST':
-        'PORT':
+        'NAME':'os.environ['DATABASE_NAME']',
+        'USER':'os.environ['DATABASE_USR']',
+        'PASSWORD':os.environ['DATABASE_PSD'],
+        'HOST':os.environ['DATABASE_HOST']
+        'PORT':os.environ['DATABASE_PORT']
         
     }
 }
