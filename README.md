@@ -3,9 +3,9 @@ django
 # generic
 
 ## pre-reqs - python3.8
-pip3.8 install Django
+```pip3.8 install Django
 pip3.8 install pillow
-
+```
 ## initial django / git (basic) workflow 
 
 - create blank new repo on github
@@ -14,7 +14,7 @@ szczepanski/blog
 
 - project / repo init
 
-django-admin startproject blog_core
+```django-admin startproject blog_core
 mv blog_core blog
 cd blog
 git init
@@ -30,12 +30,12 @@ python3.8 manage.py migrate
 git add -A
 git commit -m 'applied first db migrations'
 git push origin feature1
-
+```
 
 
 - app init
 
-python3.8 manage.py startapp app_blog
+```python3.8 manage.py startapp app_blog```
 
 - add new apps to blog_core/settings.py --> INSTALLED_APPS
 'app_blog',
@@ -43,7 +43,7 @@ python3.8 manage.py startapp app_blog
 
 
 - server check
-python3.8 manage.py runserver
+```python3.8 manage.py runserver```
 
 
 - migrations - db model changes
