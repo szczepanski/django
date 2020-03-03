@@ -95,15 +95,13 @@ https://postgresapp.com/
     export DATABASE_PORT='**************'
     ```
     - set env var in dev
+    ```
     export DATABASE_NAME='core_db' 
     export DATABASE_USR='postgres' 
     export DATABASE_PSD='**************' 
     export DATABASE_HOST='localhost' 
     export DATABASE_PORT='5432'
-
-    
-  
-```
+    ```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
