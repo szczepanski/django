@@ -69,7 +69,7 @@ python3.8 manage.py changepassword <username>
 - register models to show in admin web gui 
 blog/app_projects/admin.py
 
-## migrations from sqllite3 to PostreSQL 12(Mac ver)
+## migrations from sqlite3 to PostreSQL 12(Mac ver)
 
 - download and install
 
