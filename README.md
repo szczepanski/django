@@ -79,15 +79,22 @@ https://postgresapp.com/
   - \l <list all dbs>
   
   
-  - change default sqllite3
-    - set env var 
-    ``` 
+  - change default sqllite3 in settings.py
+    - set env var in prod
+    ```
     export DATABASE_NAME='**************' 
     export DATABASE_USR='**************' 
     export DATABASE_PSD='**************' 
     export DATABASE_HOST='**************' 
     export DATABASE_PORT='**************'
     ```
+    - set env var in dev
+    export DATABASE_NAME='core_db' 
+    export DATABASE_USR='postgres' 
+    export DATABASE_PSD='**************' 
+    export DATABASE_HOST='localhost' 
+    export DATABASE_PORT='5432'
+
     
   
 ```
@@ -106,8 +113,8 @@ DATABASES = {
         'NAME':'os.environ['DATABASE_NAME']',
         'USER':'os.environ['DATABASE_USR']',
         'PASSWORD':os.environ['DATABASE_PSD'],
-        'HOST':os.environ['DATABASE_HOST']
-        'PORT':os.environ['DATABASE_PORT']
+        'HOST':os.environ['DATABASE_HOST'],
+        'PORT':os.environ['DATABASE_PORT'],
         
     }
 }
