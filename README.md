@@ -215,9 +215,14 @@ python3.8 manage.py migrate
 ```
 core_db=# \dt+
 ```
-- create superuser
+- define user - for app gui admin accees
+```python3.8 manage.py createsuperuser```
 - run server 
-```python3.8 manage.py runserver 0.0.0.0:8000```
+```python3.8 manage.py runserver 0:80```
+- check admin access
+http://0.0.0.0/admin/
+- change any default styling (css, js, images, etc. ) in .../wag_1/wag_1/static if needed
+- remove db.sqlite3 as db hosted in psql
 
 
 
