@@ -98,9 +98,11 @@ https://postgresapp.com/
     ```
     export DATABASE_NAME='core_db' 
     export DATABASE_USR='postgres' 
-    export DATABASE_PSD='**************' 
     export DATABASE_HOST='localhost' 
     export DATABASE_PORT='5432'
+    
+    export DATABASE_PSD='**************' 
+
     ```
 DATABASES = {
     'default': {
@@ -122,14 +124,18 @@ DATABASES = {
         
     }
 }
+
+
+### psql commands
+
+- resetting schema / dropping all tables
 ```
-
-
-### verify PSQL db
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+```
 - list databases ``` postgres=# \l ```
 - switching / connecting to database
 
-```
 ```
 postgres=# \c core_db 
 ```
@@ -176,6 +182,44 @@ Access method: heap
 
 
 # Django CMS - Wagtail
+## semi-detailed  workflow
+
+- pre_req and init wagtail project
+  - after wag proj init run
+  ```pip install -r requirements.txt```
+
+- migrate sqlite3 to psql
+  - set db env vars
+  - change base.py setting in .../wag_1/wag_1/settings/base.py
+  
+```
+DATABASES = {
+  'default': {
+      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      'NAME':os.environ['DATABASE_NAME'],
+      'USER':os.environ['DATABASE_USR'],
+      'PASSWORD':os.environ['DATABASE_PSD'],
+      'HOST':os.environ['DATABASE_HOST'],
+      'PORT':os.environ['DATABASE_PORT'],
+
+  }
+}
+```
+
+- makemigrations and migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- verify migration to psql
+```
+core_db=# \dt+
+```
+- create superuser
+- run server 
+```python3.8 manage.py runserver 0.0.0.0:8000```
+
+
 
 ## initial setup
 
