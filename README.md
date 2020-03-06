@@ -182,6 +182,47 @@ Access method: heap
 
 
 # Django CMS - Wagtail
+## initial setup
+
+- pre-req
+```
+mkdir django-wag
+cd django-wag
+python3.8 -m venv django-wag-venv
+source django-wag-venv/bin/activate
+pip3.8 install wagtail
+# to disable venv
+deactivate
+
+
+
+# verify wagtail
+pip show wagtail
+# verify packeges installed in venv
+pip3.8 freeze
+```
+- init project
+
+```
+#init in current dir without creating separate directory - directly within current working directory
+wagtail start wag_play .
+
+#or
+
+#init all project files inside separate wag_play subdirectory 
+wagtail start wag_play
+pip3.8 install -r requirements.txt
+```
+
+- init run
+```
+# discover migrations and migrate DB
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+# init server
+python3.8 manage.py runserver 0.0.0.0:8000
+```
+
 ## semi-detailed  workflow
 
 - pre_req and init wagtail project
@@ -236,48 +277,16 @@ python3.8 manage.py migrate
 ``` 
 python3.8 manage.py startapp services
 ```
-## initial setup
-
-- pre-req
+- add new app (services) to INSTALLED_APPS in setting in wag_1/settings/base.py
+- edit models in services/models.py and makemigrations and migrate
 ```
-mkdir django-wag
-cd django-wag
-python3.8 -m venv django-wag-venv
-source django-wag-venv/bin/activate
-pip3.8 install wagtail
-# to disable venv
-deactivate
-
-
-
-# verify wagtail
-pip show wagtail
-# verify packeges installed in venv
-pip3.8 freeze
-```
-- init project
-
-```
-#init in current dir without creating separate directory - directly within current working directory
-wagtail start wag_play .
-
-#or
-
-#init all project files inside separate wag_play subdirectory 
-wagtail start wag_play
-pip3.8 install -r requirements.txt
-```
-
-- init run
-```
-# discover migrations and migrate DB
 python3.8 manage.py makemigrations
 python3.8 manage.py migrate
-# init server
-python3.8 manage.py runserver 0.0.0.0:8000
-#
-
 ```
+- add child page to home page --> services
+home/services
+- add child page to home/services/ --> coding
+home/services/coding
 
 
 
