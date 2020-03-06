@@ -224,8 +224,13 @@ http://0.0.0.0/admin/
 - change any default styling (css, js, images, etc. ) in .../wag_1/wag_1/static if needed
 - remove db.sqlite3 as db hosted in psql
 - edit home/models.py - ensure content_panels is also added
+- makemigrations and migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
 - go to gui and add content under home page
-- 
+- edit home page
 
 ## initial setup
 
