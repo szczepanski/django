@@ -230,7 +230,8 @@ python3.8 manage.py makemigrations
 python3.8 manage.py migrate
 ```
 - go to gui and add content under home page
-- edit home page
+- edit home page home/templates/home/home_page.html
+- edit base page wag_1/templates/base.html
 
 ## initial setup
 
