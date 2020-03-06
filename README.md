@@ -315,6 +315,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 ```
+- update /wag_1/wag_1/urls.py to enable DDT - django debug toolbar
+
 
 
 
