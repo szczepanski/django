@@ -284,9 +284,12 @@ python3.8 manage.py makemigrations
 python3.8 manage.py migrate
 ```
 - add child page to home page --> services
-home/services
+  - home/services
 - add child page to home/services/ --> coding
-home/services/coding
+  - home/services/coding
+- edit templates for services (listing page) and codin (detail page)
+  - wag_1/templates/services/service_listing_page.html
+  - wag_1/templates/services/service_page.html
 
 
 
