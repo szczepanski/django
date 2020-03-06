@@ -211,7 +211,8 @@ wagtail start wag_play .
 
 #init all project files inside separate wag_play subdirectory 
 wagtail start wag_play
-pip3.8 install -r requirements.txt
+
+pip3.8 install -r requirements_dev.txt
 ```
 
 - init run
@@ -290,6 +291,32 @@ python3.8 manage.py migrate
 - edit templates for services (listing page) and codin (detail page)
   - wag_1/templates/services/service_listing_page.html
   - wag_1/templates/services/service_page.html
+
+- added clean function to handle potential validation errors in services/models.py
+- added {% include "includes/header.html" %} and {% include "includes/footer.html" %} in wag_1/templates/base.html
+- added wag_1/templates/includes/footer.html and wag_1/templates/includes/header.html
+- added /wag_1/requirements_dev.txt file to specify development requirements that also inheritx production i.e. requirements.txt
+  - requirements_dev.txt
+```
+-r requirements.txt
+django-debug-toolbar==2.2
+```
+- added to dev setting in wag_1/settings/dev.py
+```
+INSTALLED_APPS += [
+    'debug_toolbar',
+]
+
+MIDDLEWARE += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+```
+
+
 
 
 
