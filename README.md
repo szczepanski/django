@@ -224,7 +224,7 @@ python3.8 manage.py migrate
 python3.8 manage.py runserver 0.0.0.0:8000
 ```
 
-# semi-detailed  workflow
+# semi-detailed  Python/Django/Wagtail workflow
 
 - pre_req and init wagtail project
   - after wag proj init run
@@ -279,6 +279,10 @@ python3.8 manage.py migrate
 python3.8 manage.py startapp services
 ```
 - add new app (services) to INSTALLED_APPS in setting in wag_1/settings/base.py
+- in wag_1/services rempve files that are not needed when using wagtail:
+  - tests.py
+  - views.py
+  - admin.py
 - edit models in services/models.py and makemigrations and migrate
 ```
 python3.8 manage.py makemigrations
@@ -330,8 +334,48 @@ INTERNAL_IPS = [
     ```
     insiide ServiceListingPage class/ get_context function
     - got to services url --> http://0.0.0.0/services/
-    - terminal should now show pudb console, press q to quit. 
-    
+    - terminal should now show pudb console, press q to quit
+- add new service --> flexible for Misc / Miscellaneous / testing pages pages 
+```
+python3.8 manage.py startapp flexible
+```
+- add new app - flexible - to INSTALLED_APPS in settings in wag_1/settings/base.py
+- in wag_1/flexible rempve files that are not needed when using wagtail:
+  - tests.py
+  - views.py
+  - admin.py
+- add new template in wag_1/templates/flexible/flexible_page.html
+- edit models in #wag_1/flexible/models.py,  makemigrations and migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- add new flexible child page in gui
+
+
+
+## add new service django way - respecting django admin.py + use of snippet
+- add new service --> testimonials
+```
+python3.8 manage.py startapp testimonials
+```
+- in wag_1/testimonials remove files that are not needed when using wagtail (leave admin.py this time):
+  - tests.py
+  - views.py
+- add new app - testimonials - to INSTALLED_APPS in settings in wag_1/settings/base.py
+- add entry in to INSTALLED_APPS in wag_1/settings/base.py
+```
+'wagtail.contrib.modeladmin',
+```
+- in wag_1/testimonials/ edit admin.py
+- edit models in #wag_1/testimonials/models.py,  makemigrations and migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- in gui add new testimonial
+
+
 
 
 
