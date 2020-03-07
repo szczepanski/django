@@ -375,7 +375,7 @@ python3.8 manage.py migrate
 ```
 - in gui add new testimonial
 
-## add streamfield
+## add streamfield - StructBlock
 
 - add new service --> streams
 ```
@@ -386,14 +386,29 @@ python3.8 manage.py startapp streams
   - delete -> tests.py, views.py, admin.py
   - rename models.py -> blocks.py (optional)
 - edit first block in wag_1/streams/blocks.py (renamed from models.py)
-- edit /wag_1/home/models.py to make new block is available in home page
+- edit /wag_1/home/models.py to make new block TitleBlock available in home page
 - makemigrations, migrate
 ```
 python3.8 manage.py makemigrations
 python3.8 manage.py migrate
 ```
-- edit /home/templates/home/home_page.html to make new block appear in home page
+- edit /home/templates/home/home_page.html to make new TitleBlock appear in home page
 - add new template in wag_1/templates/streams/title_block.html
+
+
+## add streamfield - ListBlock
+- add new block CardsBlock(blocks.StructBlock) in streams/blocks.py
+- edit /wag_1/home/models.py to make new block CardsBlock available in home page
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- edit /home/templates/home/home_page.html to make new CardsBlock appear in home page
+- add new template in wag_1/templates/streams/cards_block.html
+
+
+
 
 
 
