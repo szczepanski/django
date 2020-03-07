@@ -224,11 +224,11 @@ python3.8 manage.py migrate
 python3.8 manage.py runserver 0.0.0.0:8000
 ```
 
-## semi-detailed  workflow
+# semi-detailed  workflow
 
 - pre_req and init wagtail project
   - after wag proj init run
-  ```pip install -r requirements.txt```
+  ```pip install -r requirements_dev.txt```
 
 - migrate sqlite3 to psql
   - set db env vars
@@ -300,8 +300,13 @@ python3.8 manage.py migrate
 ```
 -r requirements.txt
 django-debug-toolbar==2.2
+pudb==2019.2
 ```
-- added to dev setting in wag_1/settings/dev.py
+- install debugging tools
+
+  - DjDT - Django Debugging Tool
+  
+    - added to dev setting in wag_1/settings/dev.py
 ```
 INSTALLED_APPS += [
     'debug_toolbar',
@@ -315,7 +320,21 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 ```
-- update /wag_1/wag_1/urls.py to enable DDT - django debug toolbar
+
+    - update /wag_1/wag_1/urls.py to enable DDT - django debug toolbar
+  
+  - PUDB = python interactive debugger
+    - to enable it for services listing page added the folowing to the /wag_1/services/models.py:
+    ```
+    import pudb; pu.db()
+    ```
+    insiide ServiceListingPage class/ get_context function
+    - got to services url --> http://0.0.0.0/services/
+    - terminal should now show pudb console, press q to quit. 
+    
+
+
+
 
 
 
