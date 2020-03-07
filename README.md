@@ -375,7 +375,22 @@ python3.8 manage.py migrate
 ```
 - in gui add new testimonial
 
+## add streamfield
 
+- add new service --> streams
+```
+python3.8 manage.py startapp streams
+```
+- add new app - streams - to INSTALLED_APPS in settings in wag_1/settings/base.py
+- in wag_1/streams do the following 
+  - delete -> tests.py, views.py, admin.py
+  - rename models.py -> blocks.py (optional)
+- edit first block in wag_1/streams/blocks.py (renamed from models.py)
+- edit /wag_1/home/models.py to make new block is available in home page
+- 
+
+  
+  
 
 
 
