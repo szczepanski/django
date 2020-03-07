@@ -387,7 +387,16 @@ python3.8 manage.py startapp streams
   - rename models.py -> blocks.py (optional)
 - edit first block in wag_1/streams/blocks.py (renamed from models.py)
 - edit /wag_1/home/models.py to make new block is available in home page
-- 
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- edit /home/templates/home/home_page.html to make new block appear in home page
+- add new template in wag_1/templates/streams/title_block.html
+
+
+
 
   
   
