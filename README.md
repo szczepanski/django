@@ -433,6 +433,32 @@ python3.8 manage.py migrate
 - add new template in wag_1/templates/streams/call_to_action_block.html
 - add new CallToActionBlock in home page body section via gui
 
+## snippets registration
+snippets allows to make change to a snippet in one place that then updates in entire webpage wherever it is being used
+
+register sample snippet (testimonial) in home / body section 
+- add SnippetChooserBlock in wag_1/home/models.py -->> body (streamfield) so it is available iin home page / body gui
+- add new template in wag_1/templates/streams/testimonial_block.html
+- add testimonial in gui - homepage/ body section
+
+
+## table streamfield block
+TBC
+- https://learnwagtail.com/wagtail-for-beginners/table-streamfield-block/
+
+
+- add new block CallToActionBlock(blocks.StructBlock) in streams/blocks.py
+- edit /wag_1/home/models.py to make new block CallToActionBlock available in home page
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- edit /home/templates/home/home_page.html to make new CallToActionBlock appear in home page
+- add new template in wag_1/templates/streams/call_to_action_block.html
+- add new CallToActionBlock in home page body section via gui
+
+
 
 
 
