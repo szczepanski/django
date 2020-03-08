@@ -422,6 +422,16 @@ python3.8 manage.py migrate
 - add new ImageAndTextBlock in home page body section via gui
 
 ## call to action streamfield block
+- add new block CallToActionBlock(blocks.StructBlock) in streams/blocks.py
+- edit /wag_1/home/models.py to make new block CallToActionBlock available in home page
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- edit /home/templates/home/home_page.html to make new CallToActionBlock appear in home page
+- add new template in wag_1/templates/streams/call_to_action_block.html
+- add new CallToActionBlock in home page body section via gui
 
 
 
