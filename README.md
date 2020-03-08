@@ -406,9 +406,9 @@ python3.8 manage.py migrate
 ```
 - edit /home/templates/home/home_page.html to make new CardsBlock appear in home page
 - add new template in wag_1/templates/streams/cards_block.html
+- to make streamfield more structred check the below:
 
-
-
+(optimizing streamfield)[https://learnwagtail.com/wagtail-for-beginners/custom-streamfield-block-logic/]
 
 
 
