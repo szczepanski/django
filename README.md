@@ -536,6 +536,16 @@ class ServiceListingPage(Page):
     # subpage_types = ["services.ServicePage"]
     max_count = 1
 ```
+- in single site wagtail / django installation root directory should be restricted so only one Home page may be created / exist uder the root, use of max_count=1
+```
+class HomePage(Page):
+    # parent_page_types --> avoid creating child page of Home Page type uder current home page 
+    # or under any other pages such us about, contact etc.  
+    parent_page_types = ['wagtailcore.Page']
+    subpage_types={'flexible.FlexiblePage', 'services.ServiceListingPage'}
+    max_count = 1 
+```
+
 
 
 
