@@ -443,20 +443,22 @@ register sample snippet (testimonial) in home / body section
 
 
 ## table streamfield block
-TBC
-- https://learnwagtail.com/wagtail-for-beginners/table-streamfield-block/
-
-
-- add new block CallToActionBlock(blocks.StructBlock) in streams/blocks.py
-- edit /wag_1/home/models.py to make new block CallToActionBlock available in home page
+- enable table_block in INSTALLED_APPS in settings in wag_1/settings/base.py
+```
+'wagtail.contrib.table_block',
+```
+- add new block PricingTableBlock(blocks.StructBlock) in streams/blocks.py
+- edit /wag_1/home/models.py to make new block PricingTableBlock available in home page
 - makemigrations, migrate
 ```
 python3.8 manage.py makemigrations
 python3.8 manage.py migrate
 ```
-- edit /home/templates/home/home_page.html to make new CallToActionBlock appear in home page
-- add new template in wag_1/templates/streams/call_to_action_block.html
-- add new CallToActionBlock in home page body section via gui
+- add new template in wag_1/templates/streams/pricing_table_block.html
+- add new PricingTableBlock in home page body section via gui
+- some resources:
+  - [wagtail table](https://docs.wagtail.io/en/v2.5/reference/contrib/table_block.html)
+  - [handsometable](https://handsontable.com/)
 
 
 
