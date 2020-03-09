@@ -335,6 +335,9 @@ INTERNAL_IPS = [
     insiide ServiceListingPage class/ get_context function
     - got to services url --> http://0.0.0.0/services/
     - terminal should now show pudb console, press q to quit
+
+## Flexi(ble) service for Misc / testing pages
+
 - add new service --> flexible for Misc / Miscellaneous / testing pages pages 
 ```
 python3.8 manage.py startapp flexible
@@ -459,6 +462,8 @@ python3.8 manage.py migrate
 - some resources:
   - [wagtail table](https://docs.wagtail.io/en/v2.5/reference/contrib/table_block.html)
   - [handsometable](https://handsontable.com/)
+
+## richetext streamfield block
 
 
 
