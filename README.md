@@ -483,6 +483,9 @@ python3.8 manage.py migrate
 - edit flexible/models.py class FlexiblePage(Page) to include ImageChooserBlock
 - add template in wag_1/templates/streams/large_image_block.html
 
+## custom streamfield validation error
+- clen function added to streams/blocks.py to enable validation against clashes or absence internal page and external link. 
+
 
 
  
