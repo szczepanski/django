@@ -348,7 +348,7 @@ INTERNAL_IPS = [
 python3.8 manage.py startapp flexible
 ```
 - add new app - flexible - to INSTALLED_APPS in settings in wag_1/settings/base.py
-- in wag_1/flexible rempve files that are not needed when using wagtail:
+- in wag_1/flexible remove files that are not needed when using wagtail:
   - tests.py
   - views.py
   - admin.py
@@ -546,8 +546,30 @@ class HomePage(Page):
     max_count = 1 
 ```
 
+## site navigation
+- add new service --> menus
+```
+python3.8 manage.py startapp menus
+```
+- in wag_1/menus remove files that are not needed when using wagtail:
+  - tests.py
+  - views.py
+  - admin.py
+- edit menus/models.py
+- add new app - menus - to INSTALLED_APPS in settings in wag_1/settings/base.py
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+### wagtail_hooks
+- registering menu with wagtail via hooks - making it display as left panel option in web gui
+  - create menus/wagtail_hooks.py
+### template tag
 
-
+- create folder --> menus/templatetags
+- create file --> menus/templatetags/menu_tags.py
+  
 
  
 
