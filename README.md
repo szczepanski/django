@@ -489,13 +489,45 @@ python3.8 manage.py migrate
 ## limiting pages
 - purpose
   - avoid creating two home pages under single root directory of pages
-    - in home/models.py add to HomePage class the following
+  - avoid creating multiple identical pages of any other type than home (under single root directory of pages)
+  
+  - avoid creating child page of Home Page type uder current home page, or under any other pages such us about, contact etc.
+      - in home/models.py add to HomePage class the following
   ```
   class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
   ```
-  - avoid creating multiple identical pages of any other type than home (under single root directory of pages)
-  
+  - limit flexible page so it can not be created under root directory, but it can in any other location (under home directory or under itself)
+     - in home/models.py add to HomePage class the following
+  ```
+  class HomePage(Page):
+    parent_page_types = ["home.HomePage", "flex.FlexPage"]
+ - limit pages in 'services' app  
+   - edit services/models.py
+     - edit ServiceListingPage (parent page in services)
+     ```
+     # always live only under home page (not uder root anymore)
+     parent_page_types = ["home.HomePage"]
+     ```
+     or, same restriction can be achieved by specifying allowed subpage_types
+     ```
+     subpage_types = ["services.ServicePage"]
+     ```
+     - edit ServicePage (child page in services)
+     ```
+     # always live only under ServiceListingPage (not uder root or itself)
+     parent_page_types = ["services.ServiceListingPage"]
+     ```
+     to close the tree so no more pages can be created under Service Page add empty list - subpage_types = []
+     ```
+     class ServicePage(Page):
+      # always live only under ServiceListingPage (not uder root anymore)
+      parent_page_types = ["services.ServiceListingPage"]
+      subpage_types = []
+    
+     ```
+- after above edits add child page option will go straight into child page type if only one availabble / allowed
+    
 
 
 
