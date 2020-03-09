@@ -224,13 +224,14 @@ python3.8 manage.py migrate
 python3.8 manage.py runserver 0.0.0.0:8000
 ```
 
-# semi-detailed  Python/Django/Wagtail workflow
+# Python/Django/Wagtail workflow (semi-detailed)
 
+## init
 - pre_req and init wagtail project
   - after wag proj init run
   ```pip install -r requirements_dev.txt```
 
-- migrate sqlite3 to psql
+## migrate sqlite3 to psql
   - set db env vars
   - change base.py setting in .../wag_1/wag_1/settings/base.py
   
@@ -278,6 +279,7 @@ python3.8 manage.py migrate
 ``` 
 python3.8 manage.py startapp services
 ```
+## new app - services
 - add new app (services) to INSTALLED_APPS in setting in wag_1/settings/base.py
 - in wag_1/services rempve files that are not needed when using wagtail:
   - tests.py
@@ -299,7 +301,10 @@ python3.8 manage.py migrate
 - added clean function to handle potential validation errors in services/models.py
 - added {% include "includes/header.html" %} and {% include "includes/footer.html" %} in wag_1/templates/base.html
 - added wag_1/templates/includes/footer.html and wag_1/templates/includes/header.html
-- added /wag_1/requirements_dev.txt file to specify development requirements that also inheritx production i.e. requirements.txt
+
+## deboug tools
+
+- added /wag_1/requirements_dev.txt file to specify development requirements that also inherits production i.e. requirements.txt
   - requirements_dev.txt
 ```
 -r requirements.txt
@@ -464,6 +469,20 @@ python3.8 manage.py migrate
   - [handsometable](https://handsontable.com/)
 
 ## richetext streamfield block
+- copy body = StreamField(...) from home/models.py class HomePage(Page) class into
+  - flexible/models.py class FlexiblePage(Page)
+- makemigrations, migrate specific app model
+```
+python3.8 manage.py makemigrations flexible
+python3.8 manage.py migrate
+```
+- edit wag_1/templates/flexible/flexible_page.html to include block content
+- add template in wag_1/templates/streams/simple_richtext_block.html
+  
+## image chooser streamfield block
+
+
+ 
 
 
 
