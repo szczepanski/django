@@ -565,10 +565,20 @@ python3.8 manage.py migrate
 ### wagtail_hooks
 - registering menu with wagtail via hooks - making it display as left panel option in web gui
   - create menus/wagtail_hooks.py
-### template tag
 
+### custom template tag
+tags can be referenced in templates such as in header.html template ```{% load static %}``` the static content tag is used
+
+Create new custom tag --> menu_tags
 - create folder --> menus/templatetags
 - create file --> menus/templatetags/menu_tags.py
+- add reference to new menu_tags in menwag_1/templates/includes/header.html
+```
+{% load static menu_tags %}
+```
+
+- more complex menus - nested, etc, use 
+  - [wagtailmenus](https://github.com/rkhleics/wagtailmenus)
   
 
  
