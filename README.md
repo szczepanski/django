@@ -480,6 +480,9 @@ python3.8 manage.py migrate
 - add template in wag_1/templates/streams/simple_richtext_block.html
   
 ## image chooser streamfield block
+- edit flexible/models.py class FlexiblePage(Page) to include ImageChooserBlock
+- add template in wag_1/templates/streams/large_image_block.html
+
 
 
  
