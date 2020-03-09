@@ -486,6 +486,17 @@ python3.8 manage.py migrate
 ## custom streamfield validation error
 - clen function added to streams/blocks.py to enable validation against clashes or absence internal page and external link. 
 
+## limiting pages
+- purpose
+  - avoid creating two home pages under single root directory of pages
+    - in home/models.py add to HomePage class the following
+  ```
+  class HomePage(Page):
+    parent_page_types = ['wagtailcore.Page']
+  ```
+  - avoid creating multiple identical pages of any other type than home (under single root directory of pages)
+  
+
 
 
  
