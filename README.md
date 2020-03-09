@@ -582,8 +582,8 @@ Create new custom tag --> menu_tags
   
 
  
-
-
+## contact forms
+https://learnwagtail.com/wagtail-for-beginners/contact-forms-part-1/
 
 
 
