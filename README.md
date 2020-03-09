@@ -528,6 +528,14 @@ python3.8 manage.py migrate
      ```
 - after above edits add child page option will go straight into child page type if only one availabble / allowed
     
+- limit ServiceListingPage (the parent of multiple ServicePage(s)) to only one -> max_count
+```
+class ServiceListingPage(Page):
+    parent_page_types = ["home.HomePage"]
+    # same restriction can be achieved by specifying allowed subpage_types
+    # subpage_types = ["services.ServicePage"]
+    max_count = 1
+```
 
 
 
