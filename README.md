@@ -592,7 +592,14 @@ python3.8 manage.py startapp contact
   - tests.py
   - views.py
   - admin.py
-- 
+- edit contact/models.py
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+- run server and add contact page in gui
+
 
 
   
