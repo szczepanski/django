@@ -607,8 +607,44 @@ class HomePage(Page):
     subpage_types={'flexible.FlexiblePage', 'services.ServiceListingPage', 'contact.ContactPage',}
 ```
 - run server and add contact page in gui under the home page
+- add wag_1/templates/contact/contact_page.html template
+- add wag_1/templates/contact/contact_page_landing.html
 
+- install django-widget-tweaks
+- add ``` 'widget_tweaks', ``` to INSTALLED_APPS in settings in wag_1/settings/base.py
+- limite form choices in  contact/models.py 
+```
+FORM_FIELD_CHOICES = (
+    ('singleline', _('Single line text')),
+    ('multiline', _('Multi-line text')),
+    ('email', _('Email')),
+    ('url', _('URL')),
+)
+```
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
 
+- any submitted messages will show i gui --> forms section 
+
+## webp image formats
+.webp is a new age image format with high compression and very low quality loss
+use sample - webp as primary choice and oryginal format (png or jpeg) as a fall-back in case of browser legacy / incompatibility issues
+
+```
+{% load wagtailimages_tags %}
+{% image self fill-1200x775 as img %}
+{% image self fill-1200x775 format-webp as webp_img %}
+...
+  <div class="col-sm-12">
+    <picture>
+      <source srcset="{{ webp_img.url }}" type="image/webp">
+      <img src="{{ img.url }}" alt="{{ img.alt }}" style='width: 100%; height: auto;'>
+    </picture>
+  </div>
+...
 
   
   
