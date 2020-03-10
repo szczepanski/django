@@ -680,6 +680,26 @@ use sample - webp as primary choice and oryginal format (png or jpeg) as a fall-
   
   ## site global settings
 
+- init new app
+```
+python3.8 manage.py startapp site_settings
+```
+- enable site_settings and 'wagtail.contrib.settings' in INSTALLED_APPS in settings in wag_1/settings/base.py
+- add ```'wagtail.contrib.settings.context_processors.settings',``` in wag_1/settings/base.py in TEMPLATES/OPTIONS
+ list
+- in wag_1/contact remove files that are not needed when using wagtail:
+  - tests.py
+  - views.py
+  - admin.py
+- edit site_settings/models.py
+- makemigrations, migrate
+```
+python3.8 manage.py makemigrations
+python3.8 manage.py migrate
+```
+-  add social media settings (urls) in gui ->> settings/social media settings
+
+
 
 
 
