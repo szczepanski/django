@@ -715,6 +715,94 @@ python3.8 manage.py migrate
 
 ```
 
+## template fragment caching 
+### caching homepage
+
+this approach involves use of .djcache files
+
+- test in dev first by adding to wag_1/settings/dev.py
+```
+cwd = os.getcwd()
+CACHES = {
+    'default': {
+        'BACKEND':
+        'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': f'{cwd}/.cache'
+    }
+}
+```
+- create save function in home/models.py, which
+  - deletes a cache whenever a page is edited and saved, to prevent updated content not being re-cached
+  - once a page is realoaded after new changes are deteected, as old cache was delated a new one is being created
+
+- in home/templates/home/home_page.html edit content block so it allows preview to work coorectly - that it it will always show non-cached version of a page
+```
+{% block content %}
+
+  {% if not request.is_preview %}
+    {# LIVE #}
+    {% cache 2592000 home_page_streams page.id %}
+      {% for block in page.body %}
+        {% include_block block %}
+      {% endfor %}
+    {% endcache %}
+  {% else %}
+    {# PREVIEW #}
+    {% for block in page.body %}
+      {% include_block block %}
+    {% endfor %}
+  {% endif %}
+
+{% endblock content %}
+```
+
+### caching header and footer
+- in wag_1/templates/includes/header.html cache nav bar div
+```
+<div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ml-auto">
+        {% cache 2592000 site_header %}
+          {% for item in navigation.menu_items.all %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ item.link }}" {% if item.open_in_new_tab %}target="_blank"{% endif %}>
+                {{ item.title }}
+              </a>
+            </li>
+          {% endfor %}
+        {% endcache %}
+      </ul>
+    </div>
+```
+- create save function in menus/models.py, which
+  - deletes a cache whenever a page is edited and saved, to prevent updated content not being re-cached
+  - once a page is realoaded after new changes are deteected, as old cache was delated a new one is being created
+- in site_settings/models.py add save functiopn to break cache when page is saved / edited
+- in wag_1/templates/includes/footer.html cache varius parts
+
+### adding all cahcing to prod
+add to wag_1/settings/production.py to enable prod caching 
+```
+cwd = os.getcwd()
+CACHES = {
+    'default': {
+        'BACKEND':
+        'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': f'{cwd}/.cache'
+    }
+}
+```
+
+# sitemap
+
+
+
+
+
+
+
+
+
+
 
 
 
