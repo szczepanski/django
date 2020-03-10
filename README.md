@@ -598,7 +598,15 @@ python3.8 manage.py startapp contact
 python3.8 manage.py makemigrations
 python3.8 manage.py migrate
 ```
-- run server and add contact page in gui
+add 'contact.ContactPage', in home/models.py to allowed subpage_types
+```
+class HomePage(Page):
+    # parent_page_types --> avoid creating child page of Home Page type uder current home page 
+    # or under any other pages such us about, contact etc.  
+    parent_page_types = ['wagtailcore.Page']
+    subpage_types={'flexible.FlexiblePage', 'services.ServiceListingPage', 'contact.ContactPage',}
+```
+- run server and add contact page in gui under the home page
 
 
 
@@ -614,7 +622,7 @@ python3.8 manage.py migrate
 
 
 # Tips
-cd
+## project structure
 - name wag project root directory as backend
 ```
 cd blog
@@ -627,6 +635,11 @@ ls blog
 backend
 frontend
 ```
+## SMPTP or 3rd part clients to make the website send emails
+use case --> in web forms / contact pages
+- [postmarkapp](https://postmarkapp.com/)
+- [sendgrid](https://sendgrid.com/)
+- AWS SES
 # tools
 
 - online viewer to see db.sqlite3 file (if no confidential data involved)
