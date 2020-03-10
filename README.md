@@ -698,8 +698,22 @@ python3.8 manage.py makemigrations
 python3.8 manage.py migrate
 ```
 -  add social media settings (urls) in gui ->> settings/social media settings
+-  add social hours settings (urls) in gui ->> settings/hours settings
+-  add social contact settings (urls) in gui ->> settings/contact settings
 
 
+## change of Wagtails bird logo displaying in admin gui
+
+- create wag_1/templates/wagtailadmin/base.html
+```
+{% extends "wagtailadmin/base.html" %}
+{% load static %}
+
+{% block branding_logo %}
+  <img src="{% static 'images/logo.svg' %}" alt="Rocketman" height="100" width="100">
+{% endblock branding_logo %}
+
+```
 
 
 
@@ -723,6 +737,14 @@ wagtail start backend
 ls blog
 backend
 frontend
+```
+## commenting out template syntax
+```
+{% comment %}
+{% block branding_logo %}
+  <img src="{% static 'images/logo.png' %}" alt="Rocketman Logo">
+{% endblock branding_logo %}
+{% endcomment %}
 ```
 ## SMPTP or 3rd part clients to make the website send emails
 use case --> in web forms / contact pages
