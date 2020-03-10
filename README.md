@@ -331,6 +331,38 @@ INTERNAL_IPS = [
 ```
 
     - update /wag_1/wag_1/urls.py to enable DDT - django debug toolbar
+  - shell_plus
+    - pip install and add ```'django_extensions',``` to INSTALLED_APPS in settings in wag_1/settings/base.py
+
+    - run
+```
+python3.8 manage.py shell_plus
+```
+
+  - sample debugging / testing
+
+```
+# gell al wagtail pages
+Page.objects.all()
+# check home page
+home = HomePage.objects.first()
+# check home page all possible options, methods, fields
+home. <press tab>
+home.id
+home.live
+home.slug
+#verify menu
+menu = Menu.objects.first()
+menu.to_json()
+menu.title
+menu.to_json()
+menu.pk
+menu.panels
+ServicePage.objects.all()
+ServicePage.objects.live().public()
+```
+  
+  
   
   - PUDB = python interactive debugger
     - to enable it for services listing page added the folowing to the /wag_1/services/models.py:
@@ -646,8 +678,7 @@ use sample - webp as primary choice and oryginal format (png or jpeg) as a fall-
   </div>
   ```
 
-  
-  
+
 
 
 
