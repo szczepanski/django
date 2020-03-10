@@ -580,12 +580,19 @@ Create new custom tag --> menu_tags
 - more complex menus - nested, etc, use 
   - [wagtailmenus](https://github.com/rkhleics/wagtailmenus)
   
-
  
 ## contact forms
-https://learnwagtail.com/wagtail-for-beginners/contact-forms-part-1/
 
-
+- init new app
+```
+python3.8 manage.py startapp contact
+```
+- enable contact in INSTALLED_APPS in settings in wag_1/settings/base.py
+- in wag_1/contact remove files that are not needed when using wagtail:
+  - tests.py
+  - views.py
+  - admin.py
+- 
 
 
   
@@ -599,11 +606,25 @@ https://learnwagtail.com/wagtail-for-beginners/contact-forms-part-1/
 
 
 
+# Tips
+cd
+- name wag project root directory as backend
+```
+cd blog
+wagtail start backend
+```
 
+- name root directory fornt end - vue js part 
+``` ls blog
+backend
+frontend
+```
 # tools
 
 - online viewer to see db.sqlite3 file (if no confidential data involved)
 http://inloop.github.io/sqlite-viewer/
+
+
 
 
 
