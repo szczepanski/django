@@ -615,7 +615,8 @@ wagtail start backend
 ```
 
 - name root directory fornt end - vue js part 
-``` ls blog
+``` 
+ls blog
 backend
 frontend
 ```
