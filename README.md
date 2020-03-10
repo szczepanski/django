@@ -302,7 +302,7 @@ python3.8 manage.py migrate
 - added {% include "includes/header.html" %} and {% include "includes/footer.html" %} in wag_1/templates/base.html
 - added wag_1/templates/includes/footer.html and wag_1/templates/includes/header.html
 
-## deboug tools
+## deboug / testing tools -> DjDT, shell_plus, PUDB
 
 - added /wag_1/requirements_dev.txt file to specify development requirements that also inherits production i.e. requirements.txt
   - requirements_dev.txt
@@ -677,6 +677,8 @@ use sample - webp as primary choice and oryginal format (png or jpeg) as a fall-
     </picture>
   </div>
   ```
+  
+  ## site global settings
 
 
 
