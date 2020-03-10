@@ -644,7 +644,7 @@ use sample - webp as primary choice and oryginal format (png or jpeg) as a fall-
       <img src="{{ img.url }}" alt="{{ img.alt }}" style='width: 100%; height: auto;'>
     </picture>
   </div>
-...
+  ```
 
   
   
