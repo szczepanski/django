@@ -805,7 +805,7 @@ and
 - in ...urls.py add
 ``` from wagtail.contrib.sitemaps.views import sitemap```
 - in ...urls.py add to urlpatterns list
-```url(r'^sitemap.xml$', sitemap)
+```url(r'^sitemap.xml$', sitemap)```
 
 - sitemap should now be accessible:
 ```0.0.0.0:8000/sitemap.xml```
