@@ -810,6 +810,8 @@ and
 - sitemap should now be accessible:
 ```0.0.0.0:8000/sitemap.xml```
 
+- [submit the sitemap to search engines](https://yoast.com/help/submit-sitemap-search-engines/)
+
 ## prep for launch
 
 
