@@ -814,6 +814,18 @@ and
 
 ## prep for launch
 
+- update wag_1/settings/production.py
+  - update
+    - SECRET_KEY
+      - [secret key gen](https://miniwebtool.com/django-secret-key-generator/)
+    - ALLOWED_HOSTS
+    - DATABASES
+    - sentry_sdk
+      - [sentry](https://sentry.io/)
+
+[secret key gen](https://miniwebtool.com/django-secret-key-generator/)
+
+
 
 
 
@@ -848,7 +860,7 @@ ls blog
 backend
 frontend
 ```
-## commenting out template syntax
+## commenting out template syntax / entire block
 ```
 {% comment %}
 {% block branding_logo %}
