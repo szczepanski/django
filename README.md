@@ -825,58 +825,59 @@ and
 
 
 ## deployment
-- variables needed
-  - public IP
-  - linux user name
-  - project name
-  - database name
-  - db user name
-  - db password
-  - git repo 
-  - domain name
 
-- linux box setup (ubuntu example)
+### vars
+
+- public IP
+- linux user name
+- project name
+- database name
+- db user name
+- db password
+- git repo 
+- domain name
+
+### os  setup (ubuntu)
 ```
 ssh root@x.x.x.x
 # new user on your new ubuntu server
 adduser admin
 # admin privileges
 usermod -aG sudo admin
-Make sure OpenSSH is enabled
-```
-    
-
-
+# enable OpenSSH
+# fw changes
 ufw app list
 ufw allow OpenSSH
 ufw enable
 ufw status
-
-Copy your root SSH Key to the new Ubuntu user account
+#copy  root SSH Key to the new  user account
 rsync --archive --chown=admin:admin ~/.ssh /home/admin
-SSH into your server as your new Ubuntu user (don't use root)
-exit your ssh session with ctrl + d
+# ssh as non-root --> admin
 ssh admin@x.x.x.x
-Update Ubuntu
+# update OS
 sudo apt update
 sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx curl
-Log into a postgres session
+```
+
+### db setup (psql)
+```
+# log into a postgres session
 sudo -u postgres psql
-Create a new database
+# Create a new database
 CREATE DATABASE folky_prod;
-Create a new postres user with a password
+# Create a new postres user with a password
 CREATE USER admin WITH PASSWORD '***********';
-Alter the postgres role
-
-
+# Alter the postgres role
 ALTER ROLE admin SET client_encoding TO 'utf8';
 ALTER ROLE admin SET default_transaction_isolation TO 'read committed';
 ALTER ROLE admin SET timezone TO 'UTC';
 
-Make the postgres user an admin
+# Make the postgres user an admin
 GRANT ALL PRIVILEGES ON DATABASE folky_prod TO admin;
-Quit postgres
+# Quit postgres
 \q
+```
+
 Upgrade pip and install virtualenv
 sudo -H pip3 install --upgrade pip && sudo -H pip3 install virtualenv
 Create a new project directory
