@@ -821,7 +821,11 @@ and
     - ALLOWED_HOSTS
     - DATABASES
     - sentry_sdk
-      - [sentry](https://sentry.io/)
+      - open [sentry](https://sentry.io/) account
+      - set up platform (django)
+      - install sentry-sdk
+        ```pip install --upgrade 'sentry-sdk==0.14.2'```
+
 
 
 ## deployment
