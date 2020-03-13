@@ -814,7 +814,7 @@ and
 
 ## prep for launch
 
-- update wag_1/settings/production.py
+- in wag_1/settings/production.py
   - update
     - SECRET_KEY
       - [secret key gen](https://miniwebtool.com/django-secret-key-generator/)
@@ -839,7 +839,8 @@ and
         send_default_pii=True
     )
     ```
-
+- in wag_1/wsgi.py change ```os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wag_1.settings.dev")```
+to ```os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wag_1.settings.production")```
 
 
 ## deployment
