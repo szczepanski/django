@@ -876,6 +876,8 @@ ssh admin@x.x.x.x
 # update OS
 sudo apt update
 sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx curl
+sudo -H pip3 install --upgrade pip && sudo -H pip3 install virtualenv
+
 ```
 
 ### db setup (psql)
@@ -897,27 +899,26 @@ GRANT ALL PRIVILEGES ON DATABASE folky_prod TO admin;
 \q
 ```
 
-Upgrade pip and install virtualenv
-sudo -H pip3 install --upgrade pip && sudo -H pip3 install virtualenv
-Create a new project directory
+```
+# new directory
 mkdir ~/folky && cd ~/folky
-Clone your project from github into this directory
+# Clone project from github into this directory
 git clone https://github.com/szczepanski/folky.git .
-Create a new virtualenv
+# create a new virtualenv
 virtualenv .venv
-Activate your virtualenv
+# activate  virtualenv
 source .venv/bin/activate
-Install gunicorn and psycopg2-binary
+# install gunicorn and psycopg2-binary
 pip install gunicorn psycopg2-binary
-Install your project requirements
+# install your project requirements
 pip install -r requirements.txt
-Collect static with:
+# Collect static with:
 python manage.py collectstatic --settings=folky.settings.production
-Re-run your server with
+# Re-run server with
 python manage.py runserver 0.0.0.0:8000 --settings=folky.settings.production
-At this point you should see migrations are required.
-Cancel your server and run it normally with
-Set the DJANGO SETTINGS MODULE with:
+#  migrations requirement should now alert
+# stop server
+# set the DJANGO SETTINGS MODULE with:
 export DJANGO_SETTINGS_MODULE='folky.settings.production'
 Re run the server and we no longer need to specify a settings file
 Apply migrations
@@ -932,6 +933,8 @@ Go to http://x.x.x.x:8000/ and you'll see it at least loads. It'll look terrible
 The site now only work on port 8000. That's no good. We need it to run all the time.
 Make sure your in your main directory
 cd ~/folky
+```
+
 Run gunicorn on port 8000
 gunicorn --bind 0.0.0.0:8000 folky.wsgi
 Preview your site on port 8000 again, but notice this time we are running it with gunicorn
