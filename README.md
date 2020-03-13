@@ -823,7 +823,200 @@ and
     - sentry_sdk
       - [sentry](https://sentry.io/)
 
-[secret key gen](https://miniwebtool.com/django-secret-key-generator/)
+
+## deployment
+
+Enter your Droplet and Project Details Below 👇
+Droplet IP Address
+Ubuntu User Name
+Project Name
+Database Name
+Database User Name
+Database Password
+Your Git Repo URL
+Final Domain Name
+
+    Create a new Ubuntu 18 Droplet
+    You'll need your Droplet IP address
+    ssh root@x.x.x.x
+    Create a new user on your new ubuntu server
+    adduser admin
+    Give your new user admin privileges
+    usermod -aG sudo admin
+    Make sure OpenSSH is enabled
+
+
+    ufw app list
+    ufw allow OpenSSH
+    ufw enable
+    ufw status
+
+    Copy your root SSH Key to the new Ubuntu user account
+    rsync --archive --chown=admin:admin ~/.ssh /home/admin
+    SSH into your server as your new Ubuntu user (don't use root)
+    exit your ssh session with ctrl + d
+    ssh admin@x.x.x.x
+    Update Ubuntu
+    sudo apt update
+    sudo apt install python3-pip python3-dev libpq-dev postgresql postgresql-contrib nginx curl
+    Log into a postgres session
+    sudo -u postgres psql
+    Create a new database
+    CREATE DATABASE folky_prod;
+    Create a new postres user with a password
+    CREATE USER admin WITH PASSWORD '***********';
+    Alter the postgres role
+
+
+    ALTER ROLE admin SET client_encoding TO 'utf8';
+    ALTER ROLE admin SET default_transaction_isolation TO 'read committed';
+    ALTER ROLE admin SET timezone TO 'UTC';
+
+    Make the postgres user an admin
+    GRANT ALL PRIVILEGES ON DATABASE folky_prod TO admin;
+    Quit postgres
+    \q
+    Upgrade pip and install virtualenv
+    sudo -H pip3 install --upgrade pip && sudo -H pip3 install virtualenv
+    Create a new project directory
+    mkdir ~/folky && cd ~/folky
+    Clone your project from github into this directory
+    git clone https://github.com/szczepanski/folky.git .
+    Create a new virtualenv
+    virtualenv .venv
+    Activate your virtualenv
+    source .venv/bin/activate
+    Install gunicorn and psycopg2-binary
+    pip install gunicorn psycopg2-binary
+    Install your project requirements
+    pip install -r requirements.txt
+    Collect static with:
+    python manage.py collectstatic --settings=folky.settings.production
+    Re-run your server with
+    python manage.py runserver 0.0.0.0:8000 --settings=folky.settings.production
+    At this point you should see migrations are required.
+    Cancel your server and run it normally with
+    Set the DJANGO SETTINGS MODULE with:
+    export DJANGO_SETTINGS_MODULE='folky.settings.production'
+    Re run the server and we no longer need to specify a settings file
+    Apply migrations
+    python manage.py migrate
+    Create a new superuser
+    python manage.py createsuperuser
+    Allow port 8000 through ufw
+    sudo ufw allow 8000
+    Run the server on port 8000 and preview it
+    python manage.py runserver 0.0.0.0:8000
+    Go to http://x.x.x.x:8000/ and you'll see it at least loads. It'll look terrible, but it works!
+    The site now only work on port 8000. That's no good. We need it to run all the time.
+    Make sure your in your main directory
+    cd ~/folky
+    Run gunicorn on port 8000
+    gunicorn --bind 0.0.0.0:8000 folky.wsgi
+    Preview your site on port 8000 again, but notice this time we are running it with gunicorn
+    Go to http://x.x.x.x:8000/ and you'll it loads.
+    Cancel gunicorn and deactivate your virtualenv
+    ctrl + c and deactivate
+    Create a gunicorn socket file
+    sudo nano /etc/systemd/system/gunicorn.socket
+    Add this to it:
+
+    [Unit]
+    Description=gunicorn socket
+
+    [Socket]
+    ListenStream=/run/gunicorn.sock
+
+    [Install]
+    WantedBy=sockets.target
+
+    Create a systemd file for gunicorn with sudo privileges
+    sudo nano /etc/systemd/system/gunicorn.service
+    And add this into it:
+
+    [Unit]
+    Description=gunicorn daemon
+    Requires=gunicorn.socket
+    After=network.target
+
+    [Service]
+    User=admin
+    Group=www-data
+    WorkingDirectory=/home/admin/folky
+    ExecStart=/home/admin/folky/.venv/bin/gunicorn \
+            --access-logfile - \
+            --workers 3 \
+            --bind unix:/run/gunicorn.sock \
+            folky.wsgi:application
+
+    [Install]
+    WantedBy=multi-user.target
+
+    Start and enable the gunicorn
+    sudo systemctl start gunicorn.socket && sudo systemctl enable gunicorn.socket
+    Check the status of the process with:
+    sudo systemctl status gunicorn.socket
+    Should say active listening
+    Check the existence of the new socket file
+    file /run/gunicorn.sock
+    Check the gunicorn status with
+    sudo systemctl status gunicorn
+    You should see INACTIVE DEAD
+    Test the socket activation with a curl command
+    curl --unix-socket /run/gunicorn.sock localhost
+    You should see the html output of your site.
+    If you didnt, something is wrong with gunicorn. Double check your wsgi.py file, double check the gunicorn paths.
+    At this point it doesnt hurt to restart gunicorn with
+    sudo systemctl daemon-reload && sudo systemctl restart gunicorn
+    Create a new server block in nginx
+    sudo nano /etc/nginx/sites-available/folky And add this:
+
+    server {
+        listen      80;
+        listen      [::]:80;
+        server_name x.x.x.x;
+        charset     UTF-8;
+
+        error_log   /home/admin/folky/nginx-error.log;
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location /static/ {
+            alias /home/admin/folky/static/;
+        }
+
+        location /media/ {
+            alias /home/admin/folky/media/;
+        }
+
+        location / {
+            include proxy_params;
+            proxy_pass http://unix:/run/gunicorn.sock;
+        }
+    }
+
+    Create a file by linking it to the sites-enabled directory
+    sudo ln -s /etc/nginx/sites-available/folky /etc/nginx/sites-enabled
+    Test nginx with:
+    sudo nginx -t
+    If there were no errors, restart nginx
+    sudo systemctl restart nginx
+    Open the firewall to normal traffic with Nginx, and delete port 8000
+    sudo ufw delete allow 8000 && sudo ufw allow 'Nginx Full'
+    If NGINX shows the welcome to nginx page, double check your server_name ip in your nginx config file (the one we created earlier).
+    Add your IP to your domain DNS.
+    When launching your website update your nginx settings
+    sudo nano /etc/nginx/sites-available/folky Replace x.x.x.x with folky.io
+    Test nginx settings with
+    sudo nginx -t
+    Restart nginx with
+    sudo systemctl restart nginx
+    Add your new domain to your allowed hosts
+    sudo nano folky/settings/production.py Add folky.io to the ALLOWED_HOSTS and Remove the ip address of x.x.x.x
+    Add x.x.x.x to your domain DNS settings and wait for it to propogate
+    View your new website at folky.io
+    Update the wagtail site settings
+    Go to http://folky.io/admin/sites/2/ and: change localhost to folky.io
+
+
 
 
 
